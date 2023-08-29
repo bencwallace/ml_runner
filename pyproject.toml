@@ -8,8 +8,8 @@ authors = ["Ben Wallace <bencwallace@gmail.com>"]
 python = "^3.10"
 pytorch-lightning = "^2.0.7"
 hydra-core = "^1.3.2"
-torch = {version = "^2.0.1+cpu", source = "pytorch-cpu"}
-torchvision = {version = "^0.15.2+cpu", source = "pytorch-cpu"}
+torch = {version = "^2.0.1+cu117", source = "pytorch-cu117"}
+torchvision = {version = "^0.15.2+cu117", source = "pytorch-cu117"}
 
 [tool.poetry.dev-dependencies]
 black = "^21.12b0"
@@ -24,6 +24,11 @@ name = "pytorch-cpu"
 url = "https://download.pytorch.org/whl/cpu"
 priority = "explicit"
 
+
+[[tool.poetry.source]]
+name = "pytorch-cu117"
+url = "https://download.pytorch.org/whl/cu117"
+priority = "primary"
 
 [tool.poetry.group.dev.dependencies]
 ipython = "^8.14.0"

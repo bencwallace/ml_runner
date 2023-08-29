@@ -22,6 +22,7 @@ pl_module:
 
 trainer:
   _target_: pytorch_lightning.Trainer
+  accelerator: gpu
 
 train_loader:
   _target_: torch.utils.data.DataLoader
