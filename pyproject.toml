@@ -1,0 +1,17 @@
+[tool.poetry]
+name = "ml_training"
+version = "0.1.0"
+description = ""
+authors = ["Ben Wallace <bencwallace@gmail.com>"]
+
+[tool.poetry.dependencies]
+python = "^3.10"
+
+[tool.poetry.dev-dependencies]
+black = "^21.12b0"
+pytest = "^6.2.5"
+flake8 = "^4.0.1"
+
+[build-system]
+requires = ["poetry-core>=1.0.0"]
+build-backend = "poetry.core.masonry.api"
