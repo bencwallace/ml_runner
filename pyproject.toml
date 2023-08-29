@@ -16,6 +16,9 @@ black = "^21.12b0"
 pytest = "^6.2.5"
 flake8 = "^4.0.1"
 
+[tool.poetry.scripts]
+ml_fit = "ml_training.main:fit"
+
 [[tool.poetry.source]]
 name = "pytorch-cpu"
 url = "https://download.pytorch.org/whl/cpu"
