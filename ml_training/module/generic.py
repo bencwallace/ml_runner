@@ -14,6 +14,7 @@ class GenericModule(pl.LightningModule):
         x, y = batch
         logits = self.model(x)
         loss = self.loss_fn(logits, y)
+        self.log("train/loss", loss, prog_bar=True, on_step=False, on_epoch=True)
         return loss
 
     def configure_optimizers(self) -> Any:
