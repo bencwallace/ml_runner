@@ -1,5 +1,5 @@
 [tool.poetry]
-name = "ml_training"
+name = "ml_runner"
 version = "0.1.0"
 description = ""
 authors = ["Ben Wallace <bencwallace@gmail.com>"]
@@ -17,7 +17,7 @@ pytest = "^6.2.5"
 flake8 = "^4.0.1"
 
 [tool.poetry.scripts]
-ml_run = "ml_training.main:main"
+ml_run = "ml_runner.main:main"
 
 [[tool.poetry.source]]
 name = "PyPI"
