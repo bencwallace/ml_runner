@@ -14,6 +14,7 @@ trainer:
   _target_: pytorch_lightning.Trainer
   accelerator: gpu
   max_epochs: ${num_epochs}
+  callbacks: ${oc.dict.values:callbacks}
 
 train_loader:
   _target_: torch.utils.data.DataLoader
@@ -34,6 +35,8 @@ entrypoint:
 
 defaults:
   - _self_
+  - callbacks:
+    - lr_monitor
   - dataset: cifar10
   - model: resnet18
   - optimizer: sgd
