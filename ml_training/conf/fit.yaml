@@ -1,9 +1,9 @@
 input_size: 64
+num_classes: 10
 
 pl_module:
   _target_: ml_training.module.generic.GenericModule
-  model:
-    _target_: torchvision.models.resnet50
+  model: ${model}
   loss_fn:
     _target_: torch.nn.CrossEntropyLoss
   optimizer:
@@ -29,3 +29,4 @@ entrypoint:
 defaults:
   - _self_
   - dataset: cifar10
+  - model: resnet18
