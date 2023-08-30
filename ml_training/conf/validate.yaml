@@ -1,0 +1,31 @@
+input_size: 64
+
+pl_module:
+  _target_: ml_training.module.generic.GenericModule
+  model: ${model}
+  loss_fn:
+    _target_: torch.nn.CrossEntropyLoss
+  metrics: ${metrics}
+
+trainer:
+  _target_: pytorch_lightning.Trainer
+  accelerator: gpu
+
+val_loader:
+  _target_: torch.utils.data.DataLoader
+  batch_size: 1024
+  dataset: ${dataset.val}
+
+entrypoint:
+  _target_: ml_training.entrypoint.validate.validate
+  pl_module: ${pl_module}
+  trainer: ${trainer}
+  loader: ${val_loader}
+
+defaults:
+  - _self_
+  - dataset: cifar10
+  - model: resnet18
+  - metrics:
+    - accuracy
+    - precision

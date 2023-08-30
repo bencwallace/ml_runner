@@ -3,6 +3,6 @@ import hydra
 from hydra.utils import call
 
 
-@hydra.main(config_path="conf", config_name="fit")
-def fit(cfg):
+@hydra.main(config_path="conf")
+def main(cfg):
     call(cfg.entrypoint)

@@ -17,7 +17,7 @@ pytest = "^6.2.5"
 flake8 = "^4.0.1"
 
 [tool.poetry.scripts]
-ml_fit = "ml_training.main:fit"
+ml_run = "ml_training.main:main"
 
 [[tool.poetry.source]]
 name = "PyPI"
