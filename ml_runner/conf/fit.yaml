@@ -2,7 +2,7 @@ input_size: 64
 num_epochs: 50
 
 pl_module:
-  _target_: ml_training.module.generic.GenericModule
+  _target_: ml_runner.module.generic.GenericModule
   model: ${model}
   loss_fn:
     _target_: torch.nn.CrossEntropyLoss
@@ -27,7 +27,7 @@ val_loader:
   dataset: ${dataset.val}
 
 entrypoint:
-  _target_: ml_training.entrypoint.fit.fit
+  _target_: ml_runner.entrypoint.fit.fit
   pl_module: ${pl_module}
   trainer: ${trainer}
   train_loader: ${train_loader}
