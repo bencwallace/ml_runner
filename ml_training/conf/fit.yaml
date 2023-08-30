@@ -1,4 +1,5 @@
 input_size: 64
+num_epochs: 50
 
 pl_module:
   _target_: ml_training.module.generic.GenericModule
@@ -7,10 +8,12 @@ pl_module:
     _target_: torch.nn.CrossEntropyLoss
   optimizer: ${optimizer}
   metrics: ${metrics}
+  scheduler: ${scheduler}
 
 trainer:
   _target_: pytorch_lightning.Trainer
   accelerator: gpu
+  max_epochs: ${num_epochs}
 
 train_loader:
   _target_: torch.utils.data.DataLoader
@@ -37,3 +40,4 @@ defaults:
   - metrics:
     - accuracy
     - precision
+  - scheduler: cosine
