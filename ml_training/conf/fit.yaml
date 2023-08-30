@@ -1,13 +1,4 @@
-dataset:
-  _target_: torchvision.datasets.CIFAR10
-  root: /tmp/cifar10
-  transform:
-    _target_: torchvision.transforms.Compose
-    transforms:
-      - _target_: torchvision.transforms.Resize
-        size: 64
-      - _target_: torchvision.transforms.ToTensor
-  download: True
+input_size: 64
 
 pl_module:
   _target_: ml_training.module.generic.GenericModule
@@ -18,7 +9,7 @@ pl_module:
   optimizer:
     _target_: torch.optim.SGD
     _partial_: True
-    lr: 0.01
+    lr: 0.1
 
 trainer:
   _target_: pytorch_lightning.Trainer
@@ -26,7 +17,7 @@ trainer:
 
 train_loader:
   _target_: torch.utils.data.DataLoader
-  batch_size: 256
+  batch_size: 1024
   dataset: ${dataset}
 
 entrypoint:
@@ -34,3 +25,7 @@ entrypoint:
   pl_module: ${pl_module}
   trainer: ${trainer}
   train_loader: ${train_loader}
+
+defaults:
+  - _self_
+  - dataset: cifar10

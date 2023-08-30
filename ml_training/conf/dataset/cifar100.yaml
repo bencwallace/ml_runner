@@ -1,0 +1,9 @@
+_target_: torchvision.datasets.CIFAR100
+root: /tmp/cifar100
+transform:
+  _target_: torchvision.transforms.Compose
+  transforms:
+    - _target_: torchvision.transforms.Resize
+      size: ${input_size}
+    - _target_: torchvision.transforms.ToTensor
+download: True
