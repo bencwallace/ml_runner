@@ -6,7 +6,7 @@ from pytorch_lightning.utilities.types import STEP_OUTPUT
 
 
 class GenericModule(pl.LightningModule):
-    def __init__(self, model, loss_fn, optimizer, metrics, scheduler) -> None:
+    def __init__(self, model, loss_fn, metrics, optimizer=None, scheduler=None) -> None:
         super().__init__()
         self.model = model
         self.loss_fn = loss_fn
