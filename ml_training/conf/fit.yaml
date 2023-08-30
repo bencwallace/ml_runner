@@ -1,5 +1,4 @@
 input_size: 64
-num_classes: 10
 
 pl_module:
   _target_: ml_training.module.generic.GenericModule
@@ -18,13 +17,19 @@ trainer:
 train_loader:
   _target_: torch.utils.data.DataLoader
   batch_size: 1024
-  dataset: ${dataset}
+  dataset: ${dataset.train}
+
+val_loader:
+  _target_: torch.utils.data.DataLoader
+  batch_size: 1024
+  dataset: ${dataset.val}
 
 entrypoint:
   _target_: ml_training.entrypoint.fit.fit
   pl_module: ${pl_module}
   trainer: ${trainer}
   train_loader: ${train_loader}
+  val_loader: ${val_loader}
 
 defaults:
   - _self_

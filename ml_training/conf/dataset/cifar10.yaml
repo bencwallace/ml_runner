@@ -1,9 +1,23 @@
-_target_: torchvision.datasets.CIFAR10
-root: /tmp/cifar10
-transform:
-  _target_: torchvision.transforms.Compose
-  transforms:
-    - _target_: torchvision.transforms.Resize
-      size: ${input_size}
-    - _target_: torchvision.transforms.ToTensor
-download: True
+num_classes: 10
+train:
+  _target_: torchvision.datasets.CIFAR10
+  train: True
+  root: /tmp/cifar10
+  transform:
+    _target_: torchvision.transforms.Compose
+    transforms:
+      - _target_: torchvision.transforms.Resize
+        size: ${input_size}
+      - _target_: torchvision.transforms.ToTensor
+  download: True
+val:
+  _target_: torchvision.datasets.CIFAR10
+  train: False
+  root: /tmp/cifar10
+  transform:
+    _target_: torchvision.transforms.Compose
+    transforms:
+      - _target_: torchvision.transforms.Resize
+        size: ${input_size}
+      - _target_: torchvision.transforms.ToTensor
+  download: True
