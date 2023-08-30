@@ -1,0 +1,3 @@
+precision:
+  _target_: torchmetrics.classification.MulticlassPrecision
+  num_classes: ${dataset.num_classes}
