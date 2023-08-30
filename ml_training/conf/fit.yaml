@@ -6,6 +6,7 @@ pl_module:
   loss_fn:
     _target_: torch.nn.CrossEntropyLoss
   optimizer: ${optimizer}
+  metrics: ${metrics}
 
 trainer:
   _target_: pytorch_lightning.Trainer
@@ -33,3 +34,6 @@ defaults:
   - dataset: cifar10
   - model: resnet18
   - optimizer: sgd
+  - metrics:
+    - accuracy
+    - precision

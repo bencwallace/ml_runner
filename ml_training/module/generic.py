@@ -1,14 +1,17 @@
 from typing import Any
+
 import pytorch_lightning as pl
+import torch
 from pytorch_lightning.utilities.types import STEP_OUTPUT
 
 
 class GenericModule(pl.LightningModule):
-    def __init__(self, model, loss_fn, optimizer) -> None:
+    def __init__(self, model, loss_fn, optimizer, metrics) -> None:
         super().__init__()
         self.model = model
         self.loss_fn = loss_fn
         self.optimizer = optimizer
+        self.metrics = torch.nn.ModuleDict(metrics)
 
     def training_step(self, batch, _) -> STEP_OUTPUT:
         x, y = batch
@@ -22,7 +25,11 @@ class GenericModule(pl.LightningModule):
         logits = self.model(x)
         loss = self.loss_fn(logits, y)
         self.log("val/loss", loss, prog_bar=True, on_step=False, on_epoch=True)
-        return loss
+
+        y_hat = torch.argmax(logits, dim=1)
+        for name, metric in self.metrics.items():
+            val = metric(y_hat, y).flatten()
+            self.log(f"val/{name}", val, prog_bar=True, on_step=False, on_epoch=True)
 
     def configure_optimizers(self) -> Any:
         optimizer = self.optimizer(params=self.parameters())
