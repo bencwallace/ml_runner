@@ -1,4 +1,10 @@
 {
+    "[python]": {
+        "diffEditor.ignoreTrimWhitespace": false,
+        "editor.wordBasedSuggestions": false,
+        "editor.defaultFormatter": "ms-python.black-formatter",
+        "editor.formatOnSave": true
+    },
     "python.linting.flake8Enabled": true,
     "python.linting.enabled": true,
     "python.linting.flake8Args": [
@@ -7,14 +13,7 @@
     ],
     "python.defaultInterpreterPath": "${workspaceFolder}/.venv/bin/python",
     "python.envFile": "${workspaceFolder}/.venv/pyvenv.cfg",
-    "editor.formatOnSave": true,
-    "python.formatting.provider": "black",
-    "python.formatting.blackArgs": [
-        "--line-length",
-        "120",
-        "--target-version",
-        "py310"
-    ],
+    "black-formatter.args": ["--line-length", "100"],
     "files.exclude": {
         "**/.git": true,
         "**/.svn": true,
@@ -23,5 +22,5 @@
         "**/.DS_Store": true,
         "**/Thumbs.db": true,
         "**/__pycache__": true
-    }
+    },
 }
