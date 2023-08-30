@@ -6,12 +6,13 @@ from pytorch_lightning.utilities.types import STEP_OUTPUT
 
 
 class GenericModule(pl.LightningModule):
-    def __init__(self, model, loss_fn, optimizer, metrics) -> None:
+    def __init__(self, model, loss_fn, optimizer, metrics, scheduler) -> None:
         super().__init__()
         self.model = model
         self.loss_fn = loss_fn
         self.optimizer = optimizer
         self.metrics = torch.nn.ModuleDict(metrics)
+        self.scheduler = scheduler
 
     def training_step(self, batch, _) -> STEP_OUTPUT:
         x, y = batch
@@ -35,4 +36,5 @@ class GenericModule(pl.LightningModule):
         optimizer = self.optimizer(params=self.parameters())
         return {
             "optimizer": optimizer,
+            "lr_scheduler": self.scheduler(optimizer=optimizer),
         }
