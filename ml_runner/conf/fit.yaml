@@ -4,8 +4,7 @@ num_epochs: 50
 pl_module:
   _target_: ml_runner.module.generic.GenericModule
   model: ${model}
-  loss_fn:
-    _target_: torch.nn.CrossEntropyLoss
+  loss_fn: ${loss}
   optimizer: ${optimizer}
   metrics: ${metrics}
   scheduler: ${scheduler}
@@ -38,6 +37,7 @@ defaults:
   - callbacks:
     - lr_monitor
   - dataset: cifar10
+  - loss: crossentropy
   - model: resnet18
   - optimizer: sgd
   - metrics:
