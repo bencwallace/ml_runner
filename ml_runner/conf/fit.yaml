@@ -1,5 +1,7 @@
+batch_size: 1024
 input_size: 64
 num_epochs: 50
+num_workers: 10
 
 pl_module:
   _target_: ml_runner.module.generic.GenericModule
@@ -17,13 +19,17 @@ trainer:
 
 train_loader:
   _target_: torch.utils.data.DataLoader
-  batch_size: 1024
+  batch_size: ${batch_size}
   dataset: ${dataset.train}
+  shuffle: True
+  num_workers: ${num_workers}
 
 val_loader:
   _target_: torch.utils.data.DataLoader
-  batch_size: 1024
+  batch_size: ${batch_size}
   dataset: ${dataset.val}
+  shuffle: False
+  num_workers: ${num_workers}
 
 entrypoint:
   _target_: ml_runner.entrypoint.fit.fit
