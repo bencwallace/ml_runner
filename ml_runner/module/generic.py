@@ -1,12 +1,22 @@
-from typing import Any
+from typing import Any, Optional
 
 import pytorch_lightning as pl
 import torch
+import torch.nn as nn
+from torch.optim import Optimizer
+from torch.optim.lr_scheduler import LRScheduler
 from pytorch_lightning.utilities.types import STEP_OUTPUT
 
 
 class GenericModule(pl.LightningModule):
-    def __init__(self, model, loss_fn, metrics, optimizer=None, scheduler=None) -> None:
+    def __init__(
+        self,
+        model: nn.Module,
+        loss_fn: nn.Module,
+        metrics: nn.Module,
+        optimizer: Optional[Optimizer] = None,
+        scheduler: Optional[LRScheduler] = None,
+    ) -> None:
         super().__init__()
         self.model = model
         self.loss_fn = loss_fn
