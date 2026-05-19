@@ -3,6 +3,6 @@ import hydra
 from hydra.utils import call
 
 
-@hydra.main(config_path="conf")
+@hydra.main(version_base=None, config_path="conf")
 def main(cfg):
     call(cfg.entrypoint)
