@@ -1,6 +1,10 @@
 version = 1
 revision = 3
 requires-python = "==3.10"
+resolution-markers = [
+    "platform_machine != 'aarch64' or platform_python_implementation != 'CPython' or sys_platform != 'linux'",
+    "platform_machine == 'aarch64' and platform_python_implementation == 'CPython' and sys_platform == 'linux'",
+]
 
 [[package]]
 name = "aiohttp"
@@ -419,8 +423,10 @@ source = { editable = "." }
 dependencies = [
     { name = "hydra-core" },
     { name = "pytorch-lightning" },
-    { name = "torch" },
-    { name = "torchvision" },
+    { name = "torch", version = "2.0.1", source = { registry = "https://download.pytorch.org/whl/cu117" }, marker = "platform_machine == 'aarch64' and platform_python_implementation == 'CPython' and sys_platform == 'linux'" },
+    { name = "torch", version = "2.0.1+cu117", source = { registry = "https://download.pytorch.org/whl/cu117" }, marker = "platform_machine != 'aarch64' or platform_python_implementation != 'CPython' or sys_platform != 'linux'" },
+    { name = "torchvision", version = "0.15.2", source = { registry = "https://download.pytorch.org/whl/cu117" }, marker = "platform_machine == 'aarch64' and platform_python_implementation == 'CPython' and sys_platform == 'linux'" },
+    { name = "torchvision", version = "0.15.2+cu117", source = { registry = "https://download.pytorch.org/whl/cu117" }, marker = "platform_machine != 'aarch64' or platform_python_implementation != 'CPython' or sys_platform != 'linux'" },
 ]
 
 [package.dev-dependencies]
@@ -433,10 +439,10 @@ dev = [
 
 [package.metadata]
 requires-dist = [
-    { name = "hydra-core", specifier = "==1.3.2" },
-    { name = "pytorch-lightning", specifier = "==2.0.7" },
-    { name = "torch", specifier = "==2.0.1+cu117", index = "https://download.pytorch.org/whl/cu117" },
-    { name = "torchvision", specifier = "==0.15.2+cu117", index = "https://download.pytorch.org/whl/cu117" },
+    { name = "hydra-core", specifier = "~=1.3.2" },
+    { name = "pytorch-lightning", specifier = "~=2.0.7" },
+    { name = "torch", specifier = "~=2.0.1", index = "https://download.pytorch.org/whl/cu117" },
+    { name = "torchvision", specifier = "~=0.15.2", index = "https://download.pytorch.org/whl/cu117" },
 ]
 
 [package.metadata.requires-dev]
@@ -707,7 +713,8 @@ dependencies = [
     { name = "numpy" },
     { name = "packaging" },
     { name = "pyyaml" },
-    { name = "torch" },
+    { name = "torch", version = "2.0.1", source = { registry = "https://download.pytorch.org/whl/cu117" }, marker = "platform_machine == 'aarch64' and platform_python_implementation == 'CPython' and sys_platform == 'linux'" },
+    { name = "torch", version = "2.0.1+cu117", source = { registry = "https://download.pytorch.org/whl/cu117" }, marker = "platform_machine != 'aarch64' or platform_python_implementation != 'CPython' or sys_platform != 'linux'" },
     { name = "torchmetrics" },
     { name = "tqdm" },
     { name = "typing-extensions" },
@@ -803,15 +810,36 @@ wheels = [
 
 [[package]]
 name = "torch"
+version = "2.0.1"
+source = { registry = "https://download.pytorch.org/whl/cu117" }
+resolution-markers = [
+    "platform_machine == 'aarch64' and platform_python_implementation == 'CPython' and sys_platform == 'linux'",
+]
+dependencies = [
+    { name = "filelock", marker = "platform_machine == 'aarch64' and platform_python_implementation == 'CPython' and sys_platform == 'linux'" },
+    { name = "jinja2", marker = "platform_machine == 'aarch64' and platform_python_implementation == 'CPython' and sys_platform == 'linux'" },
+    { name = "networkx", marker = "platform_machine == 'aarch64' and platform_python_implementation == 'CPython' and sys_platform == 'linux'" },
+    { name = "sympy", marker = "platform_machine == 'aarch64' and platform_python_implementation == 'CPython' and sys_platform == 'linux'" },
+    { name = "typing-extensions", marker = "platform_machine == 'aarch64' and platform_python_implementation == 'CPython' and sys_platform == 'linux'" },
+]
+wheels = [
+    { url = "https://download-r2.pytorch.org/whl/torch-2.0.1-cp310-cp310-manylinux2014_aarch64.whl", hash = "sha256:359bfaad94d1cda02ab775dc1cc386d585712329bb47b8741607ef6ef4950747", upload-time = "2023-10-06T21:39:27Z" },
+]
+
+[[package]]
+name = "torch"
 version = "2.0.1+cu117"
 source = { registry = "https://download.pytorch.org/whl/cu117" }
+resolution-markers = [
+    "platform_machine != 'aarch64' or platform_python_implementation != 'CPython' or sys_platform != 'linux'",
+]
 dependencies = [
-    { name = "filelock" },
-    { name = "jinja2" },
-    { name = "networkx" },
-    { name = "sympy" },
+    { name = "filelock", marker = "platform_machine != 'aarch64' or platform_python_implementation != 'CPython' or sys_platform != 'linux'" },
+    { name = "jinja2", marker = "platform_machine != 'aarch64' or platform_python_implementation != 'CPython' or sys_platform != 'linux'" },
+    { name = "networkx", marker = "platform_machine != 'aarch64' or platform_python_implementation != 'CPython' or sys_platform != 'linux'" },
+    { name = "sympy", marker = "platform_machine != 'aarch64' or platform_python_implementation != 'CPython' or sys_platform != 'linux'" },
     { name = "triton", marker = "platform_machine == 'x86_64' and sys_platform == 'linux'" },
-    { name = "typing-extensions" },
+    { name = "typing-extensions", marker = "platform_machine != 'aarch64' or platform_python_implementation != 'CPython' or sys_platform != 'linux'" },
 ]
 wheels = [
     { url = "https://download-r2.pytorch.org/whl/cu117/torch-2.0.1%2Bcu117-cp310-cp310-linux_x86_64.whl", hash = "sha256:bb54b705185bea820e6ec6485a25761bc03f689e1a09a37d814d6ea8e276b5bd", upload-time = "2023-10-09T00:13:37Z" },
@@ -825,7 +853,8 @@ source = { registry = "https://pypi.org/simple" }
 dependencies = [
     { name = "lightning-utilities" },
     { name = "numpy" },
-    { name = "torch" },
+    { name = "torch", version = "2.0.1", source = { registry = "https://download.pytorch.org/whl/cu117" }, marker = "platform_machine == 'aarch64' and platform_python_implementation == 'CPython' and sys_platform == 'linux'" },
+    { name = "torch", version = "2.0.1+cu117", source = { registry = "https://download.pytorch.org/whl/cu117" }, marker = "platform_machine != 'aarch64' or platform_python_implementation != 'CPython' or sys_platform != 'linux'" },
 ]
 sdist = { url = "https://files.pythonhosted.org/packages/c7/77/cc3a96f3df3144e3792c6dd2e724b98a739ab93019d9a54ada35818c5421/torchmetrics-1.1.1.tar.gz", hash = "sha256:65ea34205c0506eecfd06b98f63f4d2a2c5c0e17367cf324e1747adc854c80a5", size = 452267, upload-time = "2023-08-29T07:03:28.098Z" }
 wheels = [
@@ -834,13 +863,33 @@ wheels = [
 
 [[package]]
 name = "torchvision"
+version = "0.15.2"
+source = { registry = "https://download.pytorch.org/whl/cu117" }
+resolution-markers = [
+    "platform_machine == 'aarch64' and platform_python_implementation == 'CPython' and sys_platform == 'linux'",
+]
+dependencies = [
+    { name = "numpy", marker = "platform_machine == 'aarch64' and platform_python_implementation == 'CPython' and sys_platform == 'linux'" },
+    { name = "pillow", marker = "platform_machine == 'aarch64' and platform_python_implementation == 'CPython' and sys_platform == 'linux'" },
+    { name = "requests", marker = "platform_machine == 'aarch64' and platform_python_implementation == 'CPython' and sys_platform == 'linux'" },
+    { name = "torch", version = "2.0.1", source = { registry = "https://download.pytorch.org/whl/cu117" }, marker = "platform_machine == 'aarch64' and platform_python_implementation == 'CPython' and sys_platform == 'linux'" },
+]
+wheels = [
+    { url = "https://download-r2.pytorch.org/whl/torchvision-0.15.2-cp310-cp310-manylinux2014_aarch64.whl", hash = "sha256:1eefebf5fbd01a95fe8f003d623d941601c94b5cec547b420da89cb369d9cf96", upload-time = "2023-10-06T21:47:29Z" },
+]
+
+[[package]]
+name = "torchvision"
 version = "0.15.2+cu117"
 source = { registry = "https://download.pytorch.org/whl/cu117" }
+resolution-markers = [
+    "platform_machine != 'aarch64' or platform_python_implementation != 'CPython' or sys_platform != 'linux'",
+]
 dependencies = [
-    { name = "numpy" },
-    { name = "pillow" },
-    { name = "requests" },
-    { name = "torch" },
+    { name = "numpy", marker = "platform_machine != 'aarch64' or platform_python_implementation != 'CPython' or sys_platform != 'linux'" },
+    { name = "pillow", marker = "platform_machine != 'aarch64' or platform_python_implementation != 'CPython' or sys_platform != 'linux'" },
+    { name = "requests", marker = "platform_machine != 'aarch64' or platform_python_implementation != 'CPython' or sys_platform != 'linux'" },
+    { name = "torch", version = "2.0.1+cu117", source = { registry = "https://download.pytorch.org/whl/cu117" }, marker = "platform_machine != 'aarch64' or platform_python_implementation != 'CPython' or sys_platform != 'linux'" },
 ]
 wheels = [
     { url = "https://download-r2.pytorch.org/whl/cu117/torchvision-0.15.2%2Bcu117-cp310-cp310-linux_x86_64.whl", hash = "sha256:1ee57f2bee878ad8574ea559bb7172c1cfaad168634fa738479e1fe3bdd7eaca", upload-time = "2023-10-09T03:36:28Z" },
@@ -873,10 +922,10 @@ name = "triton"
 version = "2.0.0"
 source = { registry = "https://pypi.org/simple" }
 dependencies = [
-    { name = "cmake" },
-    { name = "filelock" },
-    { name = "lit" },
-    { name = "torch" },
+    { name = "cmake", marker = "platform_machine != 'aarch64' or platform_python_implementation != 'CPython' or sys_platform != 'linux'" },
+    { name = "filelock", marker = "platform_machine != 'aarch64' or platform_python_implementation != 'CPython' or sys_platform != 'linux'" },
+    { name = "lit", marker = "platform_machine != 'aarch64' or platform_python_implementation != 'CPython' or sys_platform != 'linux'" },
+    { name = "torch", version = "2.0.1+cu117", source = { registry = "https://download.pytorch.org/whl/cu117" }, marker = "platform_machine != 'aarch64' or platform_python_implementation != 'CPython' or sys_platform != 'linux'" },
 ]
 wheels = [
     { url = "https://files.pythonhosted.org/packages/ca/31/ff6be541195daf77aa5c72303b2354661a69e717967d44d91eb4f3fdce32/triton-2.0.0-1-cp310-cp310-manylinux2014_x86_64.manylinux_2_17_x86_64.whl", hash = "sha256:38806ee9663f4b0f7cd64790e96c579374089e58f49aac4a6608121aa55e2505", size = 63268585, upload-time = "2023-03-20T17:32:17.169Z" },
