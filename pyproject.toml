@@ -1,6 +1,6 @@
 [project]
 name = "ml_runner"
-version = "0.1.0"
+version = "0.2.0"
 description = ""
 authors = [{ name = "Ben Wallace", email = "bencwallace@gmail.com" }]
 requires-python = "==3.10"
