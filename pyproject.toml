@@ -11,8 +11,8 @@ classifiers = [
 dependencies = [
     "pytorch-lightning==2.0.7",
     "hydra-core==1.3.2",
-    "torch==2.0.1+cu117",
-    "torchvision==0.15.2+cu117",
+    "torch==2.0.1",
+    "torchvision==0.15.2",
 ]
 
 [project.scripts]
