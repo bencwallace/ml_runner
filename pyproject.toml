@@ -5,11 +5,11 @@ description = ""
 authors = ["Ben Wallace <bencwallace@gmail.com>"]
 
 [tool.poetry.dependencies]
-python = "^3.10"
-pytorch-lightning = "^2.0.7"
-hydra-core = "^1.3.2"
-torch = {version = "^2.0.1+cu117", source = "pytorch-cu117"}
-torchvision = {version = "^0.15.2+cu117", source = "pytorch-cu117"}
+python = "3.10"
+pytorch-lightning = "2.0.7"
+hydra-core = "1.3.2"
+torch = {version = "2.0.1+cu117", source = "pytorch-cu117"}
+torchvision = {version = "0.15.2+cu117", source = "pytorch-cu117"}
 
 [tool.poetry.scripts]
 ml_run = "ml_runner.main:main"
